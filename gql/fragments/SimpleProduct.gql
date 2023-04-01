@@ -6,9 +6,10 @@ fragment SimpleProduct on SimpleProduct {
   rawRegularPrice: regularPrice(format: RAW)
   salePrice
   rawSalePrice: salePrice(format: RAW)
+  dateOnSaleTo
   stockStatus
   stockQuantity
-  description
+  rawDescription: description(format: RAW)
   shortDescription
   averageRating
   weight

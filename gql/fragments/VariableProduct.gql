@@ -3,6 +3,7 @@ fragment VariableProduct on VariableProduct {
   rawPrice: price(format: RAW)
   slug
   description
+  rawDescription: description(format: RAW)
   shortDescription
   weight
   length
@@ -19,6 +20,7 @@ fragment VariableProduct on VariableProduct {
   rawRegularPrice: regularPrice(format: RAW)
   salePrice
   rawSalePrice: salePrice(format: RAW)
+  dateOnSaleTo
   stockStatus
   totalSales
   stockQuantity
@@ -41,8 +43,12 @@ fragment VariableProduct on VariableProduct {
       name
       databaseId
       price
+      rawPrice: price(format: RAW)
       regularPrice
+      rawRegularPrice: regularPrice(format: RAW)
       salePrice
+      rawSalePrice: salePrice(format: RAW)
+      dateOnSaleTo
       slug
       stockQuantity
       stockStatus

@@ -59,6 +59,13 @@ function removeBodyClass(className: string) {
   }
 }
 
+function getCurrencyCode() {
+  const runtimeConfig = useRuntimeConfig()
+  const currencyCode = runtimeConfig?.public?.CURRENCY_CODE || 'EUR';
+
+  return currencyCode;
+}
+
 // A collection of helper functions.
 export function useHelpers() {
 
@@ -68,5 +75,5 @@ export function useHelpers() {
     state === undefined ? (isShowingMobileMenu.value = !isShowingMobileMenu.value) : (isShowingMobileMenu.value = state);
   }
 
-  return { formatArray, arraysEqual, clearAllCookies, replaceQueryParam, toggleBodyClass, removeBodyClass, isShowingMobileMenu, toggleMobileMenu };
+  return { formatArray, arraysEqual, clearAllCookies, replaceQueryParam, toggleBodyClass, removeBodyClass, isShowingMobileMenu, toggleMobileMenu, getCurrencyCode };
 }

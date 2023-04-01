@@ -119,7 +119,7 @@
 
 <script setup>
 const route = useRoute();
-const { arraysEqual, formatArray } = useHelpers();
+const { arraysEqual, formatArray, getCurrencyCode } = useHelpers();
 const { addToCart, isUpdatingCart } = useCart();
 
 const { data } = await useAsyncGql('getProduct', { slug: route.params.slug });
@@ -128,7 +128,7 @@ const product = data.value.product;
 useHead({
   title: product.name,
   meta: [
-    { hid: 'description', name: 'description', content: product.description },
+    { hid: 'description', name: 'description', content: product.rawDescription },
   ],
 });
 
@@ -162,8 +162,11 @@ const checkForVariationTypeOfAny = () => {
   }
 };
 
+console.log('Price: ', type.value.rawPrice)
+
 onMounted(() => {
   if (product.variations) checkForVariationTypeOfAny(product.variations.nodes);
+  console.log('Price: ', type.value.rawPrice)
 });
 
 const updateSelectedVariations = (variations) => {
@@ -193,6 +196,20 @@ const updateSelectedVariations = (variations) => {
     : null;
   variation.value = variations;
 };
+
+useJsonld({
+  '@context': 'https://schema.org',
+  "@type": "Product",
+  name: product.name,
+  sku: product.sku,
+  description: product.rawDescription,
+  offers: {
+    "@type": "Offer",
+    price: `${type.value.rawPrice}`,
+    priceCurrency: getCurrencyCode(),
+    priceValidUntil: type.dateOnSaleTo,
+  }
+});
 </script>
 
 <style>

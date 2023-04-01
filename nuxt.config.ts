@@ -18,6 +18,7 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@nuxt/image-edge',
     '@nuxtjs/i18n',
+    'nuxt-jsonld',
   ],
 
   plugins: [
